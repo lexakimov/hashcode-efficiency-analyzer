@@ -11,10 +11,17 @@ public class SummaryPrinter implements ResultPrinter {
         System.out.printf("LoadFactor:        %5s\n", metaInfo.getLoadFactor());
         System.out.println();
 
+        var totalBucketCount = metaInfo.getTotalBucketCount();
+        var emptyBucketsCount = metaInfo.getEmptyBucketsCount();
+        var emptyBucketsPercentage = emptyBucketsCount * 100.0 / totalBucketCount;
+
+        var nonEmptyBucketsCount = metaInfo.getNonEmptyBucketsCount();
+        var nonEmptyBucketsPercentage = nonEmptyBucketsCount * 100.0 / totalBucketCount;
+
         System.out.println(GREEN + "SUMMARY:" + RESET);
-        System.out.printf("Total buckets:     %5s\n", metaInfo.getTotalBucketCount());
-        System.out.printf("Empty buckets:     %5s\n", metaInfo.getEmptyBucketsCount());
-        System.out.printf("Non-empty buckets: %5s\n", metaInfo.getNonEmptyBucketsCount());
+        System.out.printf("Total buckets:     %5s\n", totalBucketCount);
+        System.out.printf("Empty buckets:     %5s   %3.2f%%\n", emptyBucketsCount, emptyBucketsPercentage);
+        System.out.printf("Non-empty buckets: %5s   %3.2f%%\n", nonEmptyBucketsCount, nonEmptyBucketsPercentage);
         System.out.printf("Largest bucket size:%4s\n", metaInfo.getLargestBucketSize());
         System.out.printf("Efficiency:        %4s%%\n", "TODO");
     }
