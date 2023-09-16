@@ -1,5 +1,7 @@
 package com.github.lexakimov.hashcode.output;
 
+import static com.github.lexakimov.hashcode.EfficiencyAnalyzer.calculateEfficiency;
+
 import com.github.lexakimov.hashcode.analysis.HashMapMetaInfo;
 
 public class SummaryPrinter implements ResultPrinter {
@@ -23,7 +25,7 @@ public class SummaryPrinter implements ResultPrinter {
         System.out.printf("Empty buckets:     %5s   %3.2f%%\n", emptyBucketsCount, emptyBucketsPercentage);
         System.out.printf("Non-empty buckets: %5s   %3.2f%%\n", nonEmptyBucketsCount, nonEmptyBucketsPercentage);
         System.out.printf("Largest bucket size:%4s\n", metaInfo.getLargestBucketSize());
-        System.out.printf("Efficiency:        %4s%%\n", "TODO");
+        System.out.printf("Efficiency:        %4s%%\n", calculateEfficiency(metaInfo));
     }
 
 }
