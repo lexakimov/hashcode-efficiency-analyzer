@@ -13,6 +13,14 @@ public class ReflectionUtil {
                 field.setAccessible(true);
                 return returnType.cast(field.get(object));
             }
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains(
+                "Unable to make field final float java.util.HashMap.loadFactor accessible: module java.base does not \"opens java.util\"")) {
+                System.err.println(
+                    "You should run application with VM argument: --add-opens java.base/java.util=ALL-UNNAMED");
+                System.exit(1);
+            }
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
